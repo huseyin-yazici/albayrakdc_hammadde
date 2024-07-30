@@ -11,7 +11,7 @@ class AcceptanceControlPage extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       appBar: CustomAppBar(
         isHome:false ,
       ),
@@ -29,10 +29,29 @@ class AcceptanceControlPage extends StatelessWidget {
             _buildTextFieldWithIcon(FieldLabel.castingNumber, Icons.format_list_numbered),
             _buildTextFieldWithIcon(FieldLabel.weight, Icons.local_grocery_store),
             _buildContainer(screenHeight, screenWidth),
+            buildElevatedButton(),
           ],
         ),
       ),
     );
+  }
+
+  ElevatedButton buildElevatedButton() {
+    return ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: const BorderSide(color: Colors.red, width: 2),
+              ),
+              elevation: 0,
+            ),
+            child: const Text(
+              'Kaydet',
+              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+            ),
+          );
   }
 
   Widget _buildTextFieldWithIcon(FieldLabel fieldLabel, IconData icon) {
@@ -46,14 +65,14 @@ class AcceptanceControlPage extends StatelessWidget {
             child: Center(
               child: CustomText(
                 fieldLabel.label,
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             flex: 7,
             child: TextFormField(
@@ -65,7 +84,7 @@ class AcceptanceControlPage extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.blue),
+                  borderSide: const BorderSide(color: Colors.red),
                 ),
               ),
             ),
@@ -77,7 +96,7 @@ class AcceptanceControlPage extends StatelessWidget {
 
   Container _buildContainer(double screenHeight, double screenWidth) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
       height: screenHeight / 5,
       width: screenWidth,
       decoration: BoxDecoration(
@@ -91,40 +110,46 @@ class AcceptanceControlPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                child: Icon(
-                  color: ColorConstants.black,
-                  Icons.camera_alt_outlined,
-                  size: screenWidth * 0.15,
+                child: const Column(
+                  children: [
+                    Icon(
+                      color: ColorConstants.black,
+                      Icons.camera_alt_outlined,
+                    ),SizedBox(height: 8),
+                    CustomText(
+                      'Kamerayı Açmak için Tıklayınız',
+                      textStyle: TextStyle(fontWeight: FontWeight.bold,),
+                    ),
+                  ],
                 ),
                 onTap: () {
                   print('Kamera tıklandı');
                 },
               ),
-              const SizedBox(height: 8),
-              CustomText(
-                'Kamerayı Açmak için Tıklayınız',
-                textStyle: TextStyle(fontWeight: FontWeight.bold),
-              ),
+
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                child: Icon(
-                  color: ColorConstants.black,
-                  Icons.qr_code_sharp,
-                  size: screenWidth * 0.15,
+                child: const Column(
+                  children: [
+                    Icon(
+                      color: ColorConstants.black,
+                      Icons.qr_code_sharp,
+                    ), SizedBox(height: 8),
+                    CustomText(
+                      "QR'ı Açmak için Tıklayınız",
+                      textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 onTap: () {
                   print('QR tıklandı');
                 },
               ),
-              SizedBox(height: 8),
-              CustomText(
-                "QR'ı Açmak için Tıklayınız",
-                textStyle: TextStyle(fontWeight: FontWeight.bold),
-              ),
+
             ],
           ),
         ],
